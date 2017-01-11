@@ -293,26 +293,5 @@ public class MzMLFileImportMethod implements MSDKMethod<RawDataFile> {
         this.canceled = true;
     }
 
-    public static void main(String[] args) {
-    	MzMLFileImportMethod mfim = new MzMLFileImportMethod(new File("/home/cruttkie/Dokumente/PhD/MetFrag/msdk/MetaboliteSpectralDB.mzML"));
-    	RawDataFile result;
-    	try {
-    		result = mfim.execute();
-    		java.util.List<MsScan> scans = result.getScans();
-    		for(MsScan scan : scans) {
-    			java.util.Hashtable<String,String> userParams = scan.getUserParams();
-    			if(userParams == null) continue; 
-    			java.util.Enumeration<String> keys = userParams.keys();
-    			while(keys.hasMoreElements()) {
-    				System.out.print(keys.nextElement() + " ");
-    			}
-    			System.out.println();
-    		}
-		} catch (MSDKException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    }
     
 }
