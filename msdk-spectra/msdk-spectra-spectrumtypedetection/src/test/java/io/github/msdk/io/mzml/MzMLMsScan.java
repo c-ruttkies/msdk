@@ -54,7 +54,7 @@ class MzMLMsScan extends AbstractReadOnlyMsScan {
 
         super(dataFile, spectrumType, msFunction, chromatographyInfo, scanType,
                 mzRange, scanningRange, scanNumber, scanDefinition, tic,
-                polarity, sourceFragmentation, isolations, numOfDataPoints);
+                polarity, sourceFragmentation, isolations, numOfDataPoints, null);
 
         this.dataFile = dataFile;
         this.spectrumId = spectrumId;

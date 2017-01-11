@@ -74,7 +74,14 @@ class SimpleMsScan extends AbstractSpectrum implements MsScan {
         this.scanNumber = scanNumber;
         this.msFunction = msFunction;
     }
-
+    
+    /** {@inheritDoc} */
+    @Override
+    @Nonnull
+    public java.util.Hashtable<String, String> getUserParams() {
+        return null;
+    }
+    
     /** {@inheritDoc} */
     @Override
     @Nullable

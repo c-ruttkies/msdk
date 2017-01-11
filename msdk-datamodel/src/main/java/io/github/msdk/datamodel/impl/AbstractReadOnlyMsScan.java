@@ -14,6 +14,7 @@
 
 package io.github.msdk.datamodel.impl;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -52,6 +53,7 @@ public abstract class AbstractReadOnlyMsScan implements MsScan {
     private final @Nullable ActivationInfo sourceFragmentation;
     private final @Nonnull List<IsolationInfo> isolations;
     private final @Nonnull Integer numOfDataPoints;
+    private final @Nullable Hashtable<String, String> userParams;
 
     /**
      * <p>
@@ -101,7 +103,8 @@ public abstract class AbstractReadOnlyMsScan implements MsScan {
             @Nonnull PolarityType polarity,
             @Nullable ActivationInfo sourceFragmentation,
             @Nonnull List<IsolationInfo> isolations,
-            @Nonnull Integer numOfDataPoints) {
+            @Nonnull Integer numOfDataPoints,
+            @Nullable Hashtable<String, String> userParams) {
         this.dataFile = dataFile;
         this.spectrumType = spectrumType;
         this.msFunction = msFunction;
@@ -116,8 +119,16 @@ public abstract class AbstractReadOnlyMsScan implements MsScan {
         this.sourceFragmentation = sourceFragmentation;
         this.isolations = isolations;
         this.numOfDataPoints = numOfDataPoints;
+        this.userParams = userParams;
     }
-
+    
+    /** {@inheritDoc} */
+    @Override
+    @Nonnull
+    public Hashtable<String, String> getUserParams() {
+        return userParams;
+    }
+    
     /** {@inheritDoc} */
     @Override
     @Nonnull

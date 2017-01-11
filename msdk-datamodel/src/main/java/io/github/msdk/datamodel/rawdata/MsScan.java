@@ -14,6 +14,7 @@
 
 package io.github.msdk.datamodel.rawdata;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -37,6 +38,9 @@ import io.github.msdk.datamodel.msspectra.MsSpectrum;
  */
 public interface MsScan extends MsSpectrum {
 
+	@Nullable
+	public Hashtable<String, String> getUserParams();
+	
     /**
      * Returns the raw data file that contains this scan. This might return null
      * when the scan is created, but once the scan is added to the raw data file

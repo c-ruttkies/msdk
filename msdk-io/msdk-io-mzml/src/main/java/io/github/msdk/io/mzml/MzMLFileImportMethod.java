@@ -127,7 +127,6 @@ public class MzMLFileImportMethod implements MSDKMethod<RawDataFile> {
 
                 // Get spectrum ID
                 String spectrumId = spectrum.getId();
-
                 // Get the scan number
                 Integer scanNumber = converter.extractScanNumber(spectrum);
 
@@ -188,14 +187,15 @@ public class MzMLFileImportMethod implements MSDKMethod<RawDataFile> {
                 // Get the in-source fragmentation
                 List<IsolationInfo> isolations = converter
                         .extractIsolations(spectrum);
-
+                
                 // Create a new MsScan instance
                 MzMLMsScan scan = new MzMLMsScan(newRawFile, spectrumId,
                         spectrumType, msFunction, chromData, scanType, mzRange,
                         scanningRange, scanNumber, scanDefinition, tic,
                         polarity, sourceFragmentation, isolations,
-                        numOfDataPoints);
+                        numOfDataPoints, converter.extractUserParams(spectrum));
 
+                
                 // Add the scan to the final raw data file
                 scansList.add(scan);
 
@@ -293,4 +293,26 @@ public class MzMLFileImportMethod implements MSDKMethod<RawDataFile> {
         this.canceled = true;
     }
 
+    public static void main(String[] args) {
+    	MzMLFileImportMethod mfim = new MzMLFileImportMethod(new File("/home/cruttkie/Dokumente/PhD/MetFrag/msdk/MetaboliteSpectralDB.mzML"));
+    	RawDataFile result;
+    	try {
+    		result = mfim.execute();
+    		java.util.List<MsScan> scans = result.getScans();
+    		for(MsScan scan : scans) {
+    			java.util.Hashtable<String,String> userParams = scan.getUserParams();
+    			if(userParams == null) continue; 
+    			java.util.Enumeration<String> keys = userParams.keys();
+    			while(keys.hasMoreElements()) {
+    				System.out.print(keys.nextElement() + " ");
+    			}
+    			System.out.println();
+    		}
+		} catch (MSDKException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+    
 }

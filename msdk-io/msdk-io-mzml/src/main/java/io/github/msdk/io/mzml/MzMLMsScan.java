@@ -14,6 +14,7 @@
 
 package io.github.msdk.io.mzml;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -50,16 +51,17 @@ class MzMLMsScan extends AbstractReadOnlyMsScan {
             @Nonnull PolarityType polarity,
             @Nullable ActivationInfo sourceFragmentation,
             @Nonnull List<IsolationInfo> isolations,
-            @Nonnull Integer numOfDataPoints) {
+            @Nonnull Integer numOfDataPoints,
+            @Nullable Hashtable<String, String> userParams) {
 
         super(dataFile, spectrumType, msFunction, chromatographyInfo, scanType,
                 mzRange, scanningRange, scanNumber, scanDefinition, tic,
-                polarity, sourceFragmentation, isolations, numOfDataPoints);
+                polarity, sourceFragmentation, isolations, numOfDataPoints, userParams);
 
         this.dataFile = dataFile;
         this.spectrumId = spectrumId;
     }
-
+    
     /** {@inheritDoc} */
     @Override
     @Nonnull

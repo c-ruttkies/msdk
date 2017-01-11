@@ -53,7 +53,17 @@ public class MsSpectrumUtil {
 
         double min = mzValues[0];
         double max = mzValues[size - 1];
-        return Range.closed(min, max);
+    	if(max < min) {
+    		min = mzValues[size - 1];
+    		max = mzValues[0];
+    	}
+        
+    	try {
+        	return Range.closed(min, max);
+        } catch(Exception e) {
+        	System.out.println("error " + min + " " + max);
+        	throw new java.lang.IllegalArgumentException("Invalid range");
+        }
     }
 
     /**

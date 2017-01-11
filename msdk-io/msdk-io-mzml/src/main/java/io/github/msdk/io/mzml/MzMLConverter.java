@@ -48,6 +48,7 @@ import uk.ac.ebi.jmzml.model.mzml.Scan;
 import uk.ac.ebi.jmzml.model.mzml.ScanList;
 import uk.ac.ebi.jmzml.model.mzml.SelectedIonList;
 import uk.ac.ebi.jmzml.model.mzml.Spectrum;
+import uk.ac.ebi.jmzml.model.mzml.UserParam;
 
 /**
  * This class provides conversions between the jmzml data model and the MSDK
@@ -88,6 +89,16 @@ class MzMLConverter {
         return scanNumber;
     }
 
+    @Nullable
+    Hashtable<String,String> extractUserParams(Spectrum spectrum) {
+    	List<UserParam> userParameters = spectrum.getUserParam();
+    	Hashtable<String,String> values = new Hashtable<String,String>();
+    	for(UserParam param : userParameters) {
+    		values.put(param.getName(), param.getValue());
+    	}
+    	return values.size() != 0 ? values : null;
+    }
+    
     @Nonnull
     Boolean isMsSpectrum(Spectrum spectrum) {
 
